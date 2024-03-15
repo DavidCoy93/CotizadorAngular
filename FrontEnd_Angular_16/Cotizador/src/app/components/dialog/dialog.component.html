@@ -1,0 +1,11 @@
+<h1 mat-dialog-title>{{ data.Title }}</h1>
+<div mat-dialog-content>
+    <p><b>{{ data.Content }}</b></p>
+    <div class="spinner" *ngIf="data.Type === 'loading'"></div>
+</div>
+<div mat-dialog-actions >
+    <div class="actionButtons w-100" *ngIf="data.Type !== 'loading'">
+        <button mat-raised-button color="warn" style="width: 50%;" *ngIf="data.Type === 'question'"  (click)="close(false)">Cancelar</button>
+        <button mat-raised-button color="primary"  [ngStyle]="data.Type === 'message' ? { width: '100%' } : { width: '50%' }" (click)="close(true)">Aceptar</button>
+    </div>
+</div>

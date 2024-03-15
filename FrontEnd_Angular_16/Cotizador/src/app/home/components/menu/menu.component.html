@@ -1,0 +1,34 @@
+<nav class="navbar navbar-expand-md navbar-light fixed-top shadow-sm" style="background-color: #ffffff;">
+    <div class="navbar-brand" [style]="isSmallDevice ? { width: '25%' } : { width: '10%' }">
+        <!-- <img [src]="baseHref + 'assets/logo.png'" height="60" class="d-inline-block align-top" alt=""> -->
+        <img [src]="baseRef + 'assets/logo.jpg'" alt="" style="height: auto; width: 100%;">
+    </div>
+    <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="menu">
+        <ul class="navbar-nav me-auto">
+            <ng-container *ngFor="let menuItem of userMenu; index as i">
+                <li class="nav-item" *ngIf="menuItem.SubMenus.length === 0; else tmpDropdownMenuItem">
+                    <a class="nav-link">{{ menuItem.Menu.MenuData.Description }}</a>
+                </li>
+                <ng-template #tmpDropdownMenuItem>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            {{ menuItem.Menu.MenuData.Description }}
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li *ngFor="let subMenu of menuItem.SubMenus">
+                                <a [routerLink]="'/home/' + subMenu.MenuData.ActionName" class="dropdown-item">{{subMenu.MenuData.Description}}</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ng-template>
+            </ng-container>
+        </ul>
+        <span class="navbar-text">
+            {{ userName }}
+            <a style="cursor: pointer;" (click)="logOut()"><fa-icon [icon]="logoutIcon"></fa-icon></a>
+        </span>
+    </div>
+</nav>

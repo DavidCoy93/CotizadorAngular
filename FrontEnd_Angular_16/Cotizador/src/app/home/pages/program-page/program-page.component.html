@@ -1,0 +1,292 @@
+<div class="card">
+    <div class="card-header">
+        <h1>Agregar Programa</h1>
+    </div>
+    <div class="card-body">
+        <form [formGroup]="programGroup">
+            <div class="row">
+                <div class="col-12 col-md-4 col-lg-3">
+                    <mat-form-field>
+                        <mat-label>Código</mat-label>
+                        <input type="text" matInput formControlName="Code">
+                    </mat-form-field>
+                </div>
+                <div class="col-12 col-md-4 col-lg-3">
+                    <mat-form-field>
+                        <mat-label>Descripción</mat-label>
+                        <input type="text" matInput formControlName="Description">
+                    </mat-form-field>
+                </div>
+                <div class="col-12 col-md-4 col-lg-3">
+                    <mat-form-field>
+                        <mat-label>Identificador del certificado</mat-label>
+                        <input type="text" matInput formControlName="CertificateIdentifier" maxlength="2">
+                    </mat-form-field>
+                </div>
+                <div class="col-12 col-md-4 col-lg-3">
+                    <mat-form-field>
+                        <mat-label>Grupo</mat-label>
+                        <input type="text" matInput formControlName="IdGroup">
+                    </mat-form-field>
+                </div>
+                <div class="col-12 col-md-4 col-lg-3">
+                    <mat-checkbox formControlName="Active" color="primary">Activo</mat-checkbox>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="card mt-3">
+    <div class="card-header">
+        <h1>Configuración de porcentajes</h1>
+    </div>
+    <div class="card-body">
+        <form [formGroup]="programPercentagesForm">
+            <div class="row">
+                <div class="col-12 col-md-3 col-lg-2">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>Comisión ANSEN</h2>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-12">
+                                    <mat-form-field>
+                                        <mat-label>Min %</mat-label>
+                                        <input type="number" matInput="" min="0" max="100" formControlName="CommAnzenLower">
+                                        <mat-error *ngIf="programPercentagesControls.CommAnzenLower.errors?.['required']">Por favor ingrese un valor</mat-error>
+                                        <mat-error *ngIf="programPercentagesControls.CommAnzenLower.errors?.['min']">ingrese un valor mayor o igual a cero</mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-12">
+                                    <mat-form-field>
+                                        <mat-label>Max %</mat-label>
+                                        <input type="number" matInput="" min="0" max="100" formControlName="CommAnzenUpper">
+                                        <mat-error *ngIf="programPercentagesControls.CommAnzenUpper.errors?.['required']">Por favor ingrese un valor</mat-error>
+                                        <mat-error *ngIf="programPercentagesControls.CommAnzenUpper.errors?.['max']">ingrese un valor menor a cien</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-3 col-lg-2">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>Marketing</h2>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-12">
+                                    <mat-form-field>
+                                        <mat-label>Min %</mat-label>
+                                        <input type="number" matInput="" min="0" max="100" formControlName="MktLower">
+                                        <mat-error *ngIf="programPercentagesControls.MktLower.errors?.['required']">Por favor ingrese un valor</mat-error>
+                                        <mat-error *ngIf="programPercentagesControls.MktLower.errors?.['min']">ingrese un valor mayor o igual a cero</mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-12">
+                                    <mat-form-field>
+                                        <mat-label>Max %</mat-label>
+                                        <input type="number" matInput="" min="0" max="100" formControlName="MktUpper">
+                                        <mat-error *ngIf="programPercentagesControls.MktUpper.errors?.['required']">Por favor ingrese un valor</mat-error>
+                                        <mat-error *ngIf="programPercentagesControls.MktUpper.errors?.['max']">ingrese un valor menor a cien</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-3 col-lg-2">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>Rewards</h2>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-12">
+                                    <mat-form-field>
+                                        <mat-label>Min %</mat-label>
+                                        <input type="number" matInput="" min="0" max="100" formControlName="RewardLower">
+                                        <mat-error *ngIf="programPercentagesControls.RewardLower.errors?.['required']">Por favor ingrese un valor</mat-error>
+                                        <mat-error *ngIf="programPercentagesControls.RewardLower.errors?.['min']">ingrese un valor mayor o igual a cero</mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-12">
+                                    <mat-form-field>
+                                        <mat-label>Max %</mat-label>
+                                        <input type="number" matInput="" min="0" max="100" formControlName="RewardUpper">
+                                        <mat-error *ngIf="programPercentagesControls.RewardUpper.errors?.['required']">Por favor ingrese un valor</mat-error>
+                                        <mat-error *ngIf="programPercentagesControls.RewardUpper.errors?.['max']">ingrese un valor menor a cien</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-3 col-lg-2">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>Comisión NR</h2>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-12">
+                                    <mat-form-field>
+                                        <mat-label>Min %</mat-label>
+                                        <input type="number" matInput="" min="0" max="100" formControlName="CommNRLower">
+                                        <mat-error *ngIf="programPercentagesControls.CommNRLower.errors?.['required']">Por favor ingrese un valor</mat-error>
+                                        <mat-error *ngIf="programPercentagesControls.CommNRLower.errors?.['min']">ingrese un valor mayor o igual a cero</mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-12">
+                                    <mat-form-field>
+                                        <mat-label>Max %</mat-label>
+                                        <input type="number" matInput="" min="0" max="100" formControlName="CommNRUpper">
+                                        <mat-error *ngIf="programPercentagesControls.CommNRUpper.errors?.['required']">Por favor ingrese un valor</mat-error>
+                                        <mat-error *ngIf="programPercentagesControls.CommNRUpper.errors?.['max']">ingrese un valor menor a cien</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-3 col-lg-2">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>Comisión Planta</h2>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-12">
+                                    <mat-form-field>
+                                        <mat-label>Min %</mat-label>
+                                        <input type="number" matInput="" min="0" max="100" formControlName="CommPlantaLower">
+                                        <mat-error *ngIf="programPercentagesControls.CommPlantaLower.errors?.['required']">Por favor ingrese un valor</mat-error>
+                                        <mat-error *ngIf="programPercentagesControls.CommPlantaLower.errors?.['min']">ingrese un valor mayor o igual a cero</mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-12">
+                                    <mat-form-field>
+                                        <mat-label>Max %</mat-label>
+                                        <input type="number" matInput="" min="0" max="100" formControlName="CommPlantaUpper">
+                                        <mat-error *ngIf="programPercentagesControls.CommPlantaUpper.errors?.['required']">Por favor ingrese un valor</mat-error>
+                                        <mat-error *ngIf="programPercentagesControls.CommPlantaUpper.errors?.['max']">ingrese un valor menor a cien</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-3 col-lg-2">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>Comisión Dealer</h2>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-12">
+                                    <mat-form-field>
+                                        <mat-label>Min %</mat-label>
+                                        <input type="number" matInput="" min="0" max="100" formControlName="CommDealerLower">
+                                        <mat-error *ngIf="programPercentagesControls.CommDealerLower.errors?.['required']">Por favor ingrese un valor</mat-error>
+                                        <mat-error *ngIf="programPercentagesControls.CommDealerLower.errors?.['min']">ingrese un valor mayor o igual a cero</mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-12">
+                                    <mat-form-field>
+                                        <mat-label>Max %</mat-label>
+                                        <input type="number" matInput="" min="0" max="100" formControlName="CommDealerUpper">
+                                        <mat-error *ngIf="programPercentagesControls.CommDealerUpper.errors?.['required']">Por favor ingrese un valor</mat-error>
+                                        <mat-error *ngIf="programPercentagesControls.CommDealerUpper.errors?.['max']">ingrese un valor menor a cien</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="card mt-3" *ngIf="programGroup.valid">
+    <div class="card-header">
+        <h1>Productos</h1>
+    </div>
+    <div class="card-body">
+        <ng-container *ngIf="products.length === 0; else tmpProductList">
+            <div class="d-flex flex-row justify-content-center">
+                <span><fa-icon [icon]="iconCircleInfo"></fa-icon> Aun no se han agregado productos</span>
+            </div>
+            <ng-container [ngTemplateOutlet]="tmpBtnAddProduct"></ng-container>
+        </ng-container>
+        <ng-template #tmpProductList>
+            <div class="card" *ngFor="let product of products; index as indPro">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-12 col-md-4 col-lg-3">
+                            <span><b>Producto: {{product.Description}}</b></span>
+                        </div>
+                        <div class="col-12 col-md-4 col-lg-3">
+                            <span><b>Periodo Minimo: {{ (product.PeriodLowerLimit === 1) ? product.PeriodLowerLimit + ' Mes' : product.PeriodLowerLimit + ' Meses'   }}</b></span>
+                        </div>
+                        <div class="col-12 col-md-4 col-lg-3">
+                            <span><b>Periodo Maximo: {{ (product.PeriodUpperLimit === 1 ? product.PeriodUpperLimit + ' Mes' : product.PeriodUpperLimit + ' Meses' ) }}</b></span>
+                        </div>
+                        <div class="col-12 col-md-4 col-lg-3">
+                            <span><b>Kilometraje Minimo: {{ product.KilometerLowerLimit + ' Kms' }}</b></span>
+                        </div>
+                        <div class="col-12 col-md-4 col-lg-3">
+                            <span><b>Kilometraje Maximo: {{ product.KilometerUpperLimit + ' Kms' }}</b></span>
+                        </div>
+                        <div class="col-12 col-md-4 col-lg-3">
+                            <button type="button" mat-raised-button color="primary" (click)="openModalAddRate(indPro)" [disabled]="!this.programPercentagesForm.valid">
+                                <mat-icon>add</mat-icon> Rate
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="card" *ngFor="let prodRate of product.RateForms; index as indRate">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col-12 col-md-4 col-lg-3">
+                                    <span><b>Rate {{ indRate + 1 }}</b></span>
+                                </div>
+                                <div class="col-12 col-md-4 col-lg-3">
+                                    <span><b>Precio sin IVA: {{ prodRate.PWOIVA | currency }}</b></span>
+                                </div>
+                                <div class="col-12 col-md-4 col-lg-3">
+                                    <span><b>Precio con IVA:  {{ prodRate.PWIVA | currency }}</b></span>
+                                </div>
+                                <div class="col-12 col-md-4 col-lg-3">
+                                    <button type="button" mat-raised-button color="primary" (click)="openModalAddRate(indPro, prodRate, indRate)">
+                                        <mat-icon>edit</mat-icon> Editar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <ng-container [ngTemplateOutlet]="tmpBtnAddProduct"></ng-container>
+        </ng-template>
+    </div>
+    <div class="card-footer">
+        <div class="d-flex flex-row justify-content-end">
+            <button type="button" mat-raised-button color="primary" (click)="saveProgram()">
+                <mat-icon>save</mat-icon> Guardar
+            </button>
+        </div>
+    </div>
+</div>
+
+<ng-template #tmpBtnAddProduct>
+    <div class="d-flex flex-row justify-content-center mt-2">
+        <button mat-raised-button (click)="openModalAddProduct()" color="primary">
+            <mat-icon>add</mat-icon> Agregar producto
+        </button>
+    </div>
+</ng-template>

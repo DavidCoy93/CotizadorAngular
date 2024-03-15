@@ -1,0 +1,497 @@
+<h1 mat-dialog-title>Agregar Rate</h1>
+<div mat-dialog-content>
+    <form [formGroup]="productRateForm">
+        <div class="row mt-2">
+            <div class="col-12 col-md-4 col-lg-3">
+                <mat-form-field>
+                    <mat-label>Clase</mat-label>
+                    <!-- <mat-select formControlName="Class">
+                        <mat-option value="">Seleccione una opción</mat-option>
+                        <mat-option *ngFor="let class of classList" [value]="class.value">{{ class.text }}</mat-option>
+                    </mat-select> -->
+                    <input matInput formControlName="Class" type="text">
+                    <mat-error *ngIf="formControls.Class.errors?.['required']">Ingrese un valor</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-12 col-md-4 col-lg-3">
+                <mat-form-field>
+                    <mat-label>Duración garantía</mat-label>
+                    <mat-select formControlName="Term">
+                        <mat-option [value]="0">Seleccione una opción</mat-option>
+                        <mat-option *ngFor="let term of warrantyDurationList" [value]="term.value">{{ term.text }}</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="formControls.Term.errors?.['isNotSelected']">Seleccione una opción</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-12 col-md-4 col-lg-3">
+                <mat-form-field>
+                    <mat-label>Maximo Kilometraje</mat-label>
+                    <input matInput formControlName="MaxKM" (keypress)="commonService.isNumber($event)">
+                    <mat-error *ngIf="formControls.MaxKM.errors?.['required']">Ingrese un valor</mat-error>
+                    <mat-error *ngIf="formControls.MaxKM.errors?.['pattern']">Ingrese valor valido</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-12 col-md-4 col-lg-3">
+                <mat-form-field>
+                    <mat-label>Deducible</mat-label>
+                    <input matInput formControlName="Deductible">
+                    <mat-error *ngIf="formControls.Deductible.errors?.['required']">Ingrese un valor</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-12 col-md-4 col-lg-3">
+                <mat-form-field>
+                    <mat-label>PlanCodeEW</mat-label>
+                    <input matInput formControlName="PlanCodeEW">
+                    <mat-error *ngIf="formControls.PlanCodeEW.errors?.['required']">Ingrese un valor</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-12 col-md-4 col-lg-3">
+                <mat-form-field>
+                    <mat-label>PlanCodeRA</mat-label>
+                    <input matInput formControlName="PlanCodeRA">
+                    <mat-error *ngIf="formControls.PlanCodeRA.errors?.['required']">Ingrese un valor</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-12 col-md-4 col-lg-3">
+                <mat-form-field>
+                    <mat-label>Duración Garantía Fabricante</mat-label>
+                    <mat-select formControlName="ManufacturerTerm">
+                        <mat-option [value]="0">Seleccione una opción</mat-option>
+                        <mat-option *ngFor="let Manterm of warrantyDurationList" [value]="Manterm.value">{{ Manterm.text }}</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="formControls.ManufacturerTerm.errors?.['isNotSelected']">Seleccione una opción</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-12 col-md-4 col-lg-3">
+                <mat-form-field>
+                    <mat-label>Maximo kilometraje Fabricante</mat-label>
+                    <input matInput formControlName="ManufacturerWarrantyKM" (keypress)="commonService.isNumber($event)">
+                    <mat-error *ngIf="formControls.ManufacturerWarrantyKM.errors?.['required']">Ingrese un valor</mat-error>
+                    <mat-error *ngIf="formControls.ManufacturerWarrantyKM.errors?.['pattern']">Ingrese valor valido</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-12 col-md-4 col-lg-3">
+                <mat-form-field>
+                    <mat-label>Prima Riesgo</mat-label>
+                    <input matInput formControlName="PrimaRiesgo" (ngModelChange)="calculateRateValues()" (keypress)="commonService.isNumber($event)">
+                    <mat-error *ngIf="formControls.PrimaRiesgo.errors?.['required']">Ingrese un valor</mat-error>
+                    <mat-error *ngIf="formControls.PrimaRiesgo.errors?.['pattern']">Ingrese valor valido</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-12 col-md-4 col-lg-3">
+                <mat-form-field>
+                    <mat-label>Admin Fee</mat-label>
+                    <input matInput formControlName="AdminFee" (ngModelChange)="calculateRateValues()" (keypress)="commonService.isNumber($event)">
+                    <mat-error *ngIf="formControls.AdminFee.errors?.['required']">Ingrese un valor</mat-error>
+                    <mat-error *ngIf="formControls.AdminFee.errors?.['pattern']">Ingrese valor valido</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-12 col-md-4 col-lg-3">
+                <mat-form-field>
+                    <mat-label>Asistencia vial</mat-label>
+                    <input matInput formControlName="AsistenciaVial" (ngModelChange)="calculateRateValues()" (keypress)="commonService.isNumber($event)">
+                    <mat-error *ngIf="formControls.AsistenciaVial.errors?.['required']">Ingrese un valor</mat-error>
+                    <mat-error *ngIf="formControls.AsistenciaVial.errors?.['pattern']">Ingrese valor valido</mat-error>
+                </mat-form-field> 
+            </div>
+            <div class="col-12 col-md-4 col-lg-3">
+                <mat-form-field>
+                    <mat-label>Recuperación</mat-label>
+                    <input matInput formControlName="Recuperacion" (ngModelChange)="calculateRateValues()" (keypress)="commonService.isNumber($event)">
+                    <mat-error *ngIf="formControls.AsistenciaVial.errors?.['required']">Ingrese un valor</mat-error>
+                    <mat-error *ngIf="formControls.AsistenciaVial.errors?.['pattern']">Ingrese valor valido</mat-error>
+                </mat-form-field> 
+            </div>
+            <div class="col-12 col-md-4 col-lg-3">
+                <mat-form-field>
+                    <mat-label>APV</mat-label>
+                    <input matInput formControlName="APV" (ngModelChange)="calculateRateValues()" (keypress)="commonService.isNumber($event)">
+                    <mat-error *ngIf="formControls.AsistenciaVial.errors?.['required']">Ingrese un valor</mat-error>
+                    <mat-error *ngIf="formControls.AsistenciaVial.errors?.['pattern']">Ingrese valor valido</mat-error>
+                </mat-form-field> 
+            </div>
+            <div class="col-12 col-md-4 col-lg-3">
+                <mat-form-field>
+                    <mat-label>Adicional 1</mat-label>
+                    <input matInput formControlName="Adicional1" (ngModelChange)="calculateRateValues()" (keypress)="commonService.isNumber($event)">
+                    <mat-error *ngIf="formControls.AsistenciaVial.errors?.['required']">Ingrese un valor</mat-error>
+                    <mat-error *ngIf="formControls.AsistenciaVial.errors?.['pattern']">Ingrese valor valido</mat-error>
+                </mat-form-field> 
+            </div>
+            <div class="col-12 col-md-4 col-lg-3">
+                <mat-form-field>
+                    <mat-label>Adicional 2</mat-label>
+                    <input matInput formControlName="Adicional2" (ngModelChange)="calculateRateValues()" (keypress)="commonService.isNumber($event)">
+                    <mat-error *ngIf="formControls.AsistenciaVial.errors?.['required']">Ingrese un valor</mat-error>
+                    <mat-error *ngIf="formControls.AsistenciaVial.errors?.['pattern']">Ingrese valor valido</mat-error>
+                </mat-form-field> 
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-4 col-lg-3 mt-2">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Comisión ANSEN</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12 col-md-6">
+                                <mat-form-field>
+                                    <mat-label>Valor %</mat-label>
+                                    <input matInput type="number" [min]="data.CommAnzenLower" [max]="data.CommAnzenUpper" formControlName="CommAnzenPercentage" (ngModelChange)="calculateRateValues()" >
+                                    <mat-error *ngIf="formControls.CommAnzenPercentage.errors?.['required']">Ingrese un valor</mat-error>
+                                    <mat-error *ngIf="formControls.CommAnzenPercentage.errors?.['min']">Valor Minimo {{ data.CommAnzenLower }}</mat-error>
+                                    <mat-error *ngIf="formControls.CommAnzenPercentage.errors?.['max']">Valor Máximo {{ data.CommAnzenUpper }}</mat-error>
+                                </mat-form-field>
+                            </div> 
+                            <div class="col-12 col-md-6">
+                                <mat-form-field>
+                                    <mat-label>Resultado</mat-label>
+                                    <input matInput formControlName="CommAnzenPrice" readonly>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-4 col-lg-3 mt-2">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Marketing</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12 col-md-6">
+                                <mat-form-field>
+                                    <mat-label>Valor %</mat-label>
+                                    <input type="number" matInput [min]="data.MktLower" [max]="data.MktUpper" formControlName="MktPercentage" (ngModelChange)="calculateRateValues()">
+                                    <mat-error *ngIf="formControls.MktPercentage.errors?.['required']">Ingrese un valor</mat-error>
+                                    <mat-error *ngIf="formControls.MktPercentage.errors?.['min']">Valor Minimo {{ data.MktLower }}</mat-error>
+                                    <mat-error *ngIf="formControls.MktPercentage.errors?.['max']">Valor Máximo {{ data.MktUpper }}</mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <mat-form-field>
+                                    <mat-label>Resultado</mat-label>
+                                    <input matInput formControlName="MktPrice" readonly>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-4 col-lg-3 mt-2">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Rewards</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12 col-md-6">
+                                <mat-form-field>
+                                    <mat-label>Valor %</mat-label>
+                                    <input type="number" matInput [min]="data.RewardLower" [max]="data.RewardUpper" formControlName="RewardPercentage" (ngModelChange)="calculateRateValues()">
+                                    <mat-error *ngIf="formControls.RewardPercentage.errors?.['required']">Ingrese un valor</mat-error>
+                                    <mat-error *ngIf="formControls.RewardPercentage.errors?.['min']">Valor Minimo {{ data.RewardLower }}</mat-error>
+                                    <mat-error *ngIf="formControls.RewardPercentage.errors?.['max']">Valor Máximo {{ data.RewardUpper }}</mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <mat-form-field>
+                                    <mat-label>Resultado</mat-label>
+                                    <input matInput formControlName="RewardPrice" readonly>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-4 col-lg-3 mt-2">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Comisión NR</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12 col-md-6">
+                                <mat-form-field>
+                                    <mat-label>Valor %</mat-label>
+                                    <input type="number" matInput [min]="data.CommNRLower" [max]="data.CommNRUpper" formControlName="CommNRPercentage" (ngModelChange)="calculateRateValues()">
+                                    <mat-error *ngIf="formControls.CommNRPercentage.errors?.['required']">Ingrese un valor</mat-error>
+                                    <mat-error *ngIf="formControls.CommNRPercentage.errors?.['min']">Valor Minimo {{ data.CommNRLower }}</mat-error>
+                                    <mat-error *ngIf="formControls.CommNRPercentage.errors?.['max']">Valor Máximo {{ data.CommNRUpper }}</mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <mat-form-field>
+                                    <mat-label>Resultado</mat-label>
+                                    <input matInput formControlName="CommNRPrice" readonly>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-4 col-lg-3 mt-2">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Comisión Planta</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12 col-md-6">
+                                <mat-form-field>
+                                    <mat-label>Valor %</mat-label>
+                                    <input type="number" matInput [min]="data.CommPlantaLower" [max]="data.CommPlantaUpper" formControlName="CommPlantaPercentage" (ngModelChange)="calculateRateValues()">
+                                    <mat-error *ngIf="formControls.CommPlantaPercentage.errors?.['required']">Ingrese un valor</mat-error>
+                                    <mat-error *ngIf="formControls.CommPlantaPercentage.errors?.['min']">Valor Minimo {{ data.CommPlantaLower }}</mat-error>
+                                    <mat-error *ngIf="formControls.CommPlantaPercentage.errors?.['max']">Valor Máximo {{ data.CommPlantaUpper }}</mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <mat-form-field>
+                                    <mat-label>Resultado</mat-label>
+                                    <input matInput formControlName="CommPlantaPrice" readonly>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-4 col-lg-3 mt-2">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Comisión Dealer</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12 col-md-6">
+                                <mat-form-field>
+                                    <mat-label>Valor %</mat-label>
+                                    <input type="number" matInput [min]="data.CommDealerLower" [max]="data.CommDealerUpper" formControlName="CommDealerPercentage" (ngModelChange)="calculateRateValues()">
+                                    <mat-error *ngIf="formControls.CommDealerPercentage.errors?.['required']">Ingrese un valor</mat-error>
+                                    <mat-error *ngIf="formControls.CommDealerPercentage.errors?.['min']">Valor Minimo {{ data.CommDealerLower }}</mat-error>
+                                    <mat-error *ngIf="formControls.CommDealerPercentage.errors?.['max']">Valor Máximo {{ data.CommDealerUpper }}</mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <mat-form-field>
+                                    <mat-label>Resultado</mat-label>
+                                    <input matInput formControlName="CommDealerPrice" readonly>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-4 col-lg-6 mt-2">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Precios</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12 col-md-4">
+                                <mat-form-field>
+                                    <mat-label>Prima Neta</mat-label>
+                                    <input matInput formControlName="PrimaNeta" readonly>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-12 col-md-4">
+                                <mat-form-field>
+                                    <mat-label>Precio sin IVA</mat-label>
+                                    <input matInput formControlName="PWOIVA" readonly>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-12 col-md-4">
+                                <mat-form-field>
+                                    <mat-label>Precio con IVA</mat-label>
+                                    <input matInput formControlName="PWIVA" readonly>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="row mt-3">
+        <div class="col-12 col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Elita Servicios</h3>
+                </div>
+                <div class="card-body">
+                    <form [formGroup]="elitaServicesForm">
+                        <div class="row">
+                            <div class="col-12 col-md-9">
+                                <mat-form-field>
+                                    <mat-label>Prima Riesgo</mat-label>
+                                    <input matInput formControlName="PrimaRiesgoES" readonly>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-12 col-md-3">
+                                <mat-form-field>
+                                    <mat-label>%</mat-label>
+                                    <input matInput formControlName="PrimaRiesgoPercentageES" readonly>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <mat-form-field>
+                                    <mat-label>Admin</mat-label>
+                                    <input matInput formControlName="AdminES" readonly>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-12 col-md-3">
+                                <mat-form-field>
+                                    <mat-label>%</mat-label>
+                                    <input matInput formControlName="AdminPercentageES" readonly>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <mat-form-field>
+                                    <mat-label>MKT</mat-label>
+                                    <input matInput formControlName="MktES" readonly>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-12 col-md-3">
+                                <mat-form-field>
+                                    <mat-label>%</mat-label>
+                                    <input matInput formControlName="MktPercentageES" readonly>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <mat-form-field>
+                                    <mat-label>Comm</mat-label>
+                                    <input matInput formControlName="CommES" readonly>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-12 col-md-3">
+                                <mat-form-field>
+                                    <mat-label>%</mat-label>
+                                    <input matInput formControlName="CommPercentageES" readonly>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <mat-form-field>
+                                    <mat-label>Profit</mat-label>
+                                    <input matInput formControlName="ProfitES" (ngModelChange)="calculateRateValues()" (keypress)="commonService.isNumber($event)">
+                                    <mat-error *ngIf="formControlsES.ProfitES.errors?.['required']">Ingrese un valor</mat-error>
+                                    <mat-error *ngIf="formControlsES.ProfitES.errors?.['pattern']">Ingrese valor valido</mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-12 col-md-3">
+                                <mat-form-field>
+                                    <mat-label>%</mat-label>
+                                    <input matInput formControlName="ProfitPercentageES" readonly>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <mat-form-field>
+                                    <mat-label>Total</mat-label>
+                                    <input matInput formControlName="TotalES" readonly>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-12 col-md-3">
+                                <mat-form-field>
+                                    <mat-label>Total %</mat-label>
+                                    <input matInput formControlName="TotalPercentageES" readonly>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Elita Daños</h3>
+                </div>
+                <div class="card-body">
+                    <form [formGroup]="elitaDamagesForm">
+                        <div class="row">
+                            <div class="col-12 col-md-9">
+                                <mat-form-field>
+                                    <mat-label>Prima Riesgo</mat-label>
+                                    <input matInput formControlName="PrimaRiesgoED" readonly>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-12 col-md-3">
+                                <mat-form-field>
+                                    <mat-label>%</mat-label>
+                                    <input matInput formControlName="PrimaRiesgoPercentageED" readonly>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <mat-form-field>
+                                    <mat-label>Admin</mat-label>
+                                    <input matInput formControlName="AdminED" readonly>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-12 col-md-3">
+                                <mat-form-field>
+                                    <mat-label>%</mat-label>
+                                    <input matInput formControlName="AdminPercentageED" readonly>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <mat-form-field>
+                                    <mat-label>MKT</mat-label>
+                                    <input matInput formControlName="MktED" readonly>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-12 col-md-3">
+                                <mat-form-field>
+                                    <mat-label>%</mat-label>
+                                    <input matInput formControlName="MktPercentageED" readonly>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <mat-form-field>
+                                    <mat-label>Comm</mat-label>
+                                    <input matInput formControlName="CommED" readonly>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-12 col-md-3">
+                                <mat-form-field>
+                                    <mat-label>%</mat-label>
+                                    <input matInput formControlName="CommPercentageED" readonly>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <mat-form-field>
+                                    <mat-label>Profit</mat-label>
+                                    <input matInput formControlName="ProfitED" readonly>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-12 col-md-3">
+                                <mat-form-field>
+                                    <mat-label>%</mat-label>
+                                    <input matInput formControlName="ProfitPercentageED" readonly>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <mat-form-field>
+                                    <mat-label>Total</mat-label>
+                                    <input matInput formControlName="TotalED" readonly>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-12 col-md-3">
+                                <mat-form-field>
+                                    <mat-label>Total %</mat-label>
+                                    <input matInput formControlName="TotalPercentageED" readonly>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="d-flex flex-row justify-content-end mt-2">
+        <button type="button" mat-raised-button color="warn" (click)="closeDialog('cancel')">Cancelar</button>
+        <button type="button" mat-raised-button color="primary" class="ms-1" (click)="closeDialog('save')">Aceptar</button>
+    </div>
+</div>
+

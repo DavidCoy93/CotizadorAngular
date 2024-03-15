@@ -1,0 +1,39 @@
+﻿@model MSSPAPI.Models.LoginModel
+@{
+    ViewBag.Title = "Login";
+}
+
+<!DOCTYPE html>
+<html lang="es-mx">
+<head>
+    @*<link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script language="JavaScript" type="text/javascript" src="~/Scripts/jquery-3.4.1.min.js"></script>*@
+</head>
+<body>
+
+    @using (Html.BeginForm("Index", "Login", FormMethod.Post , new {autocomplete = "off"}))
+    {
+        @Html.AntiForgeryToken()
+        <div>
+            <label class="form-label"><span style="font-size: 20px;">Login</span></label>
+        </div>
+        <div class="form-group">
+            <span id="usr"><span class="material-icons">Usuario</span></span>
+            @Html.TextBoxFor(m => m.Usr, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            <span id="pswd"><span class="material-icons">Clave</span></span>
+            @Html.PasswordFor(m => m.Pd, new { @class = "form-control" })
+        </div>
+        <br>
+        <br>
+        <div>
+            <input id="ButtonSubmitLogin" type="submit" class="form-group btn btn-info align-middle" value="Ingresar" />
+            @*//<span class="material-icons" style="font-size:24px; vertical-align: middle;">login</span>*@
+        </div>
+    }
+</body>
+</html>
+
+

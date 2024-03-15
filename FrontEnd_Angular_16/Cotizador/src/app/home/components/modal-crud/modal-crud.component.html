@@ -1,0 +1,63 @@
+<h1 mat-dialog-title>Agregar Nuevo Producto</h1>
+<div mat-dialog-content>
+    <form [formGroup]="productForm">
+        <div class="container mt-2">
+            <div class="row">
+                <div class="col-12 col-md-4 col-lg-3">
+                    <mat-form-field>
+                        <mat-label>Descripción</mat-label>
+                        <input matInput formControlName="Description">
+                        <mat-error *ngIf="formControls.Description.errors?.['required']">Por favor ingrese una descripción</mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-12 col-md-4 col-lg-3">
+                    <mat-form-field>
+                        <mat-label>Periodo Minimo</mat-label>
+                        
+                        <mat-select formControlName="PeriodLowerLimit">
+                            <mat-option [value]="0">0 meses</mat-option>
+                            <mat-option [value]="12">12 meses</mat-option>
+                            <mat-option [value]="24">24 meses</mat-option>
+                            <mat-option [value]="36">36 meses</mat-option>
+                            <mat-option [value]="48">48 meses</mat-option>
+                            <mat-option [value]="60">60 meses</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-12 col-md-4 col-lg-3">
+                    <mat-form-field>
+                        <mat-label>Periodo Maximo</mat-label>
+                        <mat-select formControlName="PeriodUpperLimit">
+                            <mat-option [value]="0">0 meses</mat-option>
+                            <mat-option [value]="12">12 meses</mat-option>
+                            <mat-option [value]="24">24 meses</mat-option>
+                            <mat-option [value]="36">36 meses</mat-option>
+                            <mat-option [value]="48">48 meses</mat-option>
+                            <mat-option [value]="60">60 meses</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="formControls.PeriodUpperLimit.errors?.['IsNotSelected']">Seleccione una opción distinta de 0</mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-12 col-md-4 col-lg-3">
+                    <mat-form-field>
+                        <mat-label>Kilometraje Minimo</mat-label>
+                        <input matInput formControlName="KilometerLowerLimit">
+                        <mat-error *ngIf="formControls.KilometerLowerLimit.errors?.['required']">Por favor ingrese un valor</mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-12 col-md-4 col-lg-3">
+                    <mat-form-field>
+                        <mat-label>Kilometraje Máximo</mat-label>
+                        <input matInput formControlName="KilometerUpperLimit">
+                        <mat-error *ngIf="formControls.KilometerUpperLimit.errors?.['required']">Por favor ingrese un valor</mat-error>
+                        <mat-error *ngIf="formControls.KilometerUpperLimit.errors?.['IsZero']">Por favor ingrese un valor mayor a 0</mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="d-flex flex-row justify-content-end">
+                <button type="button" mat-raised-button (click)="closeDialog('cancel')" color="warn">Cancelar</button>
+                <button type="button" mat-raised-button (click)="closeDialog('save')" color="primary" class="ms-1">Aceptar</button>
+            </div> 
+        </div>
+    </form>
+</div>
