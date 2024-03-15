@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html lang="es-mx">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="shortcut icon" href="~/img/favicon.png" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="~/template/css/app.css" rel="stylesheet">
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+</head>
+
+<body>
+    <div class="card rounded-3" style="box-shadow: rgba(0, 0, 0, 0.4) 0px 30px 90px;">
+        <div class="card-body" style="justify-content: center">
+            <form asp-controller="Login" asp-action="Index" method="post">
+                <div class="mb-3 mt-1" style="justify-content: center;">
+                    <label class="form-label"><span style="font-size: 20px;">Login</span></label>
+                </div>
+                <div>
+                    <span id="addon-user"><span class="material-icons">person</span></span>
+                    <input asp-for="User" id="User" class="form-control py-2" aria-label="Username" aria_describedby="addon-user" placeholder="Usuario" />
+                </div>
+                <div class="mt-4">
+                    <span id="addon-password"><span class="material-icons">lock</span></span>
+                    <input asp-for="Password" type="password" id="Password" class="form-control py-2" aria-label="Password" aria_describedby="addon-password" placeholder="Contraseña" />
+                </div>
+                <br>
+                <br>
+                <div class="text-center mt-3">
+                    <button id="ButtonSubmitLogin" type="button" class="btn btn-block btn-primary w-100 align-middle"><span class="material-icons" style="font-size:24px; vertical-align: middle;">login</span> Ingresar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

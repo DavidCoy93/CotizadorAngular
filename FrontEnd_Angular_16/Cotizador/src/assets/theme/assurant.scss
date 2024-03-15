@@ -1,0 +1,130 @@
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+$primary-theme-color: (
+    50: #e4f5e9,
+    100: #bce7c9,
+    200: #90d7a5,
+    300: #64c781,
+    400: #42bb66,
+    500: #21af4b,
+    600: #1da844,
+    700: #189f3b,
+    800: #149633,
+    900: #0b8623,
+    A100: #b6ffc1,
+    A200: #83ff96,
+    A400: #50ff6b,
+    A700: #36ff55,
+    contrast: (
+        50: #000000,
+        100: #000000,
+        200: #000000,
+        300: #000000,
+        400: #000000,
+        500: #ffffff,
+        600: #ffffff,
+        700: #ffffff,
+        800: #ffffff,
+        900: #ffffff,
+        A100: #000000,
+        A200: #000000,
+        A400: #000000,
+        A700: #000000
+    )
+);
+
+$warn-theme-color: (
+    50: #fef3e4,
+    100: #fee2bb,
+    200: #fdce8e,
+    300: #fcba60,
+    400: #fbac3e,
+    500: #fa9d1c,
+    600: #f99519,
+    700: #f98b14,
+    800: #f88111,
+    900: #f66f09,
+    A100: #ffffff,
+    A200: #fff3ec,
+    A400: #ffd4b9,
+    A700: #ffc4a0,
+    contrast: (
+        50: #000000,
+        100: #000000,
+        200: #000000,
+        300: #000000,
+        400: #000000,
+        500: #000000,
+        600: #000000,
+        700: #000000,
+        800: #000000,
+        900: #000000,
+        A100: #000000,
+        A200: #000000,
+        A400: #000000,
+        A700: #000000
+    )
+);
+
+$accent-theme-color: (
+    50: #e1eef6,
+    100: #b5d4ea,
+    200: #84b8dc,
+    300: #539ccd,
+    400: #2e86c3,
+    500: #0971b8,
+    600: #0869b1,
+    700: #065ea8,
+    800: #0554a0,
+    900: #024291,
+    A100: #bdd6ff,
+    A200: #8ab6ff,
+    A400: #5796ff,
+    A700: #3d87ff,
+    contrast: (
+        50: #000000,
+        100: #000000,
+        200: #000000,
+        300: #000000,
+        400: #ffffff,
+        500: #ffffff,
+        600: #ffffff,
+        700: #ffffff,
+        800: #ffffff,
+        900: #ffffff,
+        A100: #000000,
+        A200: #000000,
+        A400: #000000,
+        A700: #ffffff
+    )
+);
+
+$primary-palette: mat.define-palette($primary-theme-color, 500);
+$accent-palette: mat.define-palette($accent-theme-color, 500);
+$warn-palette: mat.define-palette($warn-theme-color, 500);
+
+
+$custom-theme: mat.define-light-theme(
+    (  
+        color: (
+            primary: $primary-palette,
+            accent: $accent-palette,
+            warn: $warn-palette
+        ),
+        typography: mat.define-typography-config(),
+        density: 0
+    )
+);
+
+@include mat.all-component-themes($custom-theme);
+// @include mat.core-theme($custom-theme);
+
+
+// "@angular/material/prebuilt-themes/deeppurple-amber.css",
+// {
+//     "input": "src/assets/theme/assurant.scss",
+//     "inject": true,
+//     "bundleName": "assurant-theme"
+// },

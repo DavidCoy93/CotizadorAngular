@@ -1,0 +1,77 @@
+<form [formGroup]="RateForm">
+    <div class="card">
+        <div class="card-header">
+            <span>Administración de rates</span>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-12 col-md-4 col-lg-3">
+                    <mat-form-field>
+                        <mat-label>Programa</mat-label>
+                        <mat-select formControlName="Program" (selectionChange)="changeProgram($event)">
+                            <mat-option [value]="0">Seleccione un programa</mat-option>
+                            <mat-option *ngFor="let program of programs" [value]="program.Id">{{ program.Description }}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-12 col-md-4 col-lg-3">
+                    <mat-form-field>
+                        <mat-label>Producto</mat-label>
+                        <mat-select formControlName="Product" (selectionChange)="changeProduct($event)">
+                            <mat-option [value]="0">Seleccione un producto</mat-option>
+                            <mat-option *ngFor="let product of products" [value]="product.Id">{{ product.Description }}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-12 col-md-4 col-lg-3">
+                    <button type="button" mat-raised-button color="primary" class="w-100" routerLink="/home/program">
+                        <mat-icon>add</mat-icon> Nuevo Programa
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <ng-container *ngFor="let formgroup of arrayForms; let i = index">
+        <div class="card mt-3" [formGroup]="formgroup">
+            <div class="card-header">
+                <div class="d-flex flex-row align-items-center">
+                    <span [style]="!isSmallDevice ? { width: '90%' } : { width: '80%' }"> {{  'Vigencia de la garantia ' + formgroup.controls['Term'].value + ' meses' }} </span>
+                    <!-- <mat-checkbox formControlName="Active" [style]="!isSmallDevice ? { width: '10%' } : { width: '50%' }" color="primary">{{  (formgroup.controls['Active'].value) ? 'Ocultar' : 'Mostrar'  }}</mat-checkbox> -->
+                    <span (click)="showHideFormRate(formgroup.controls['Active'], spanShow)" style="text-decoration: underline; cursor: pointer;" #spanShow [style]="!isSmallDevice ? { width: '10%' } : { width: '20%' }">
+                        <b>{{  (formgroup.controls['Active'].value) ? 'Ocultar' : 'Mostrar'  }}</b>
+                    </span>
+                </div>
+            </div>
+            <div class="card-body" *ngIf="formgroup.controls['Active'].value">
+                <div class="row">
+                    <div class="col-12 col-md-4 col-lg-3" *ngFor="let prop of getControlNamesFromGroup(formgroup)">
+                        <ng-container [ngSwitch]="prop">
+                            
+                            <ng-container *ngSwitchDefault="">
+                                <mat-form-field *ngIf="prop !== 'Active'">
+                                    <mat-label>{{ prop }}</mat-label>
+                                    <input matInput [formControlName]="prop" readonly>
+                                </mat-form-field>
+                            </ng-container>
+
+                            <mat-form-field *ngSwitchCase="'Term'">
+                                <mat-label>{{ prop }}</mat-label>
+                                <mat-select [formControlName]="prop" [ariaReadOnly]="true">
+                                    <mat-option [value]="0">Seleccione una opción</mat-option>
+                                    <mat-option [value]="1">1 Mes</mat-option>
+                                    <mat-option [value]="12">12 Meses</mat-option>
+                                    <mat-option [value]="24">24 Meses</mat-option>
+                                    <mat-option [value]="36">36 Meses</mat-option>
+                                    <mat-option [value]="48">48 Meses</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+
+    
+</form>
